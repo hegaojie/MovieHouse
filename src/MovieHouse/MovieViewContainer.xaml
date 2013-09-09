@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="MovieHouse.MovieViewContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:MovieHouse="clr-namespace:MovieHouse"
+             Canvas.Left="{Binding Path=OffsetX}"
+             Canvas.Top="{Binding Path=OffsetY}"
+             Canvas.ZIndex="{Binding Path=ZIndex}"
+             Width="{Binding Path=Width}" 
+             Height="{Binding Path=Height}" 
+             Opacity="{Binding Path=Opacity}"
+             
+             MovieHouse:AnimationManager.TriggerAnimation="{Binding Path=TriggerAnimation}" 
+             Tag="{Binding }">
+</UserControl>

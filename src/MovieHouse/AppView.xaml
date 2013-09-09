@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="MovieHouse.AppView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:cal="http://www.caliburnproject.org" xmlns:MovieHouse="clr-namespace:MovieHouse">
+    <Grid Height="640" Width="700" Background="Aqua" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="600"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        
+        <MovieHouse:MVItemsControl x:Name="Movies" Grid.Row="0">
+            <MovieHouse:MVItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas IsItemsHost="True"/>
+                </ItemsPanelTemplate>
+            </MovieHouse:MVItemsControl.ItemsPanel>
+        </MovieHouse:MVItemsControl>
+            
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <Button Name="AddNewMovie" Content="+" Width="40" Margin="0 0 10 0" />
+            <Button Name="RemoveNewMovie" Content="-" Width="40" Margin="0 0 10 0" />
+            <Button Content="&lt;&lt;" Width="40" x:Name="FindPrevious" Margin="0 0 10 0"/>
+            <Button Content="&gt;&gt;" Width="40" x:Name="FindNext" Margin="0 0 10 0"/>
+            <Label x:Name="CurrentIndex" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" />
+            <Label Content="/" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" />
+            <Label x:Name="Total" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" />
+        </StackPanel>
+    </Grid>
+</UserControl>
