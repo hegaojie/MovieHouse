@@ -65,13 +65,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddMovieEvent.cs" />
     <Compile Include="AnimationFactor.cs" />
     <Compile Include="AnimationManager.cs" />
+    <Compile Include="MoveMovieEvent.cs" />
     <Compile Include="MovieProcessQueue.cs" />
     <Compile Include="MovieViewContainer.xaml.cs">
       <DependentUpon>MovieViewContainer.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVItemsControl.cs" />
+    <Compile Include="PlayMovieEvent.cs" />
+    <Compile Include="ReflectionControl.cs" />
     <Page Include="AppView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +98,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MovieViewContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -137,6 +145,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\add.png" />
+    <Resource Include="Icons\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\back.png" />
+    <Resource Include="Icons\next.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

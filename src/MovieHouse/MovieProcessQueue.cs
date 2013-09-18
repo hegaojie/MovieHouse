@@ -14,6 +14,8 @@ namespace MovieHouse
 
         public int Capacity { get { return _capacity; } }
 
+        public int QueueCount { get { return _queue.Count; } }
+
         public MovieProcessQueue(int capacity)
         {
             _capacity = capacity;
@@ -93,6 +95,46 @@ namespace MovieHouse
             Insert(newMovie, _queue.Count, 0);
         }
 
+        public void InsertAtRightHalf(MovieViewModel newMovie)
+        {
+            if (_queue.Count < _capacity)
+            {
+                newMovie.CenterX = _factorsMap[_queue.Count].CenterX;
+                newMovie.CenterY = _factorsMap[_queue.Count].CenterY;
+                newMovie.Scale = _factorsMap[_queue.Count].Scale;
+                newMovie.Opacity = _factorsMap[_queue.Count].Opacity;
+                newMovie.ZIndex = _factorsMap[_queue.Count].ZIndex;
+            }
+            else
+            {
+                for (var i = _queue.Count - 1; i > _capacity/2; i--)
+                {
+                    _queue[i].NewCenterX = _factorsMap[i - 1].CenterX;
+                    _queue[i].NewCenterY = _factorsMap[i - 1].CenterY;
+                    _queue[i].NewScale = _factorsMap[i - 1].Scale;
+                    _queue[i].NewOpacity = _factorsMap[i - 1].Opacity;
+                    _queue[i].NewZIndex = _factorsMap[i - 1].ZIndex;
+
+                    _queue[i].SequencialNo = _queue[i - 1].SequencialNo;
+                }
+
+                newMovie.CenterX = _factorsMap[_queue.Count - 1].CenterX;
+                newMovie.CenterY = _factorsMap[_queue.Count - 1].CenterY;
+                newMovie.Scale = _factorsMap[_queue.Count - 1].Scale;
+                newMovie.Opacity = _factorsMap[_queue.Count - 1].Opacity;
+                newMovie.ZIndex = _factorsMap[_queue.Count - 1].ZIndex;
+            }
+
+            _queue.RemoveAt(_capacity/2);
+
+            Insert(newMovie, _queue.Count, 0);
+        }
+
+        public void RemoveCenter()
+        {
+            _queue.RemoveAt(_capacity/2);
+        }
+
         private void Insert(MovieViewModel movie, int insertIndex, int removeIndex)
         {
             _queue.Insert(insertIndex, movie);
@@ -111,31 +153,33 @@ namespace MovieHouse
             }
         }
 
+        private const int CenterYConst = 300;
+
         private void InitializeFactorsMap()
         {
             _factorsMap = new List<AnimationFactor>
                               {
                                   new AnimationFactor
-                                      {CenterX = 260.0, CenterY = 300.0, Opacity = 0.0, Scale = 0.6, ZIndex = 0},       
+                                      {CenterX = 240, CenterY = CenterYConst, Opacity = 1, Scale = 0.4, ZIndex = 0},       
                                   new AnimationFactor
-                                      {CenterX = 230.0, CenterY = 300.0, Opacity = 0.1, Scale = 0.7, ZIndex = 1},
+                                      {CenterX = 120, CenterY = CenterYConst, Opacity = 1, Scale = 0.4, ZIndex = 1},
                                   new AnimationFactor
-                                      {CenterX = 260.0, CenterY = 300.0, Opacity = 0.3, Scale = 0.8, ZIndex = 2},
+                                      {CenterX = 240, CenterY = CenterYConst, Opacity = 1, Scale = 0.6, ZIndex = 2},
                                   new AnimationFactor
-                                      {CenterX = 300.0, CenterY = 300.0, Opacity = 0.5, Scale = 0.9, ZIndex = 3},
+                                      {CenterX = 380, CenterY = CenterYConst, Opacity = 1, Scale = 0.8, ZIndex = 3},
                                   
                                   // CENTER
                                   new AnimationFactor
-                                      {CenterX = 350.0, CenterY = 300.0, Opacity = 1.0, Scale = 1.0, ZIndex = 4},
+                                      {CenterX = 540.0, CenterY = CenterYConst, Opacity = 1, Scale = 1.0, ZIndex = 4},
                                   
                                   new AnimationFactor
-                                      {CenterX = 400.0, CenterY = 300.0, Opacity = 0.5, Scale = 0.9, ZIndex = 3},
+                                      {CenterX = 700, CenterY = CenterYConst, Opacity = 1, Scale = 0.8, ZIndex = 3},
                                   new AnimationFactor
-                                      {CenterX = 440.0, CenterY = 300.0, Opacity = 0.3, Scale = 0.8, ZIndex = 2},
+                                      {CenterX = 840, CenterY = CenterYConst, Opacity = 1, Scale = 0.6, ZIndex = 2},
                                   new AnimationFactor
-                                      {CenterX = 470.0, CenterY = 300.0, Opacity = 0.1, Scale = 0.7, ZIndex = 1},  
+                                      {CenterX = 960, CenterY = CenterYConst, Opacity = 1, Scale = 0.4, ZIndex = 1},  
                                   new AnimationFactor
-                                      {CenterX = 440.0, CenterY = 300.0, Opacity = 0.0, Scale = 0.6, ZIndex = 0}
+                                      {CenterX = 840, CenterY = CenterYConst, Opacity = 1, Scale = 0.4, ZIndex = 0}
                               };
         }
     }

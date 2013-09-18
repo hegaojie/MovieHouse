@@ -37,7 +37,7 @@ namespace MovieHouse
             }
             catch (Exception e)
             {
-                //throw new Exception("Configure file is empty or damaged.");
+                throw new Exception("Configure file is empty or damaged.");
             }
             finally
             {

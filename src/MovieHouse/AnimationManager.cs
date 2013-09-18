@@ -21,7 +21,7 @@ namespace MovieHouse
             return (string)e.GetValue(TriggerAnimationProperty);
         }
 
-        private const double AnimationMilliseconds = 5000;
+        private const double AnimationMilliseconds = 300;
 
         private static void OnTriggerAnimationPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -69,6 +69,7 @@ namespace MovieHouse
                                                  mvm.Opacity = mvm.NewOpacity;
                                                  mvm.CenterX = mvm.NewCenterX;
                                                  mvm.CenterY = mvm.NewCenterY;
+                                                 mvm.ZIndex = mvm.NewZIndex;
                                              };
 
             control.BeginStoryboard(sb);

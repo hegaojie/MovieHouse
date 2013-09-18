@@ -103,7 +103,12 @@ namespace MovieHouse
         public void Commit()
         {
             TryClose();
-            _eventAggregator.Publish(_movie);
+            var e = new AddMovieEvent()
+                        {
+                            Movie = _movie
+                        };
+
+            _eventAggregator.Publish(e);
         }
 
         public void Cancel()

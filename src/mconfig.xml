@@ -6,7 +6,7 @@
     <Year>2001</Year>
     <Details>Disney Cartoon 01</Details>
     <FileName>D:\70_Video\1.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\croods_320x480.jpg</PosterName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\croods_320x480.jpg</PosterName>
   </Movie>
   <Movie>
     <Name>Tangled</Name>
@@ -14,7 +14,7 @@
     <Year>2002</Year>
     <Details>Disney Cartoon 02</Details>
     <FileName>D:\70_Video\2.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\tangled_320x480.jpg</PosterName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\tangled_320x480.jpg</PosterName>
   </Movie>
   <Movie>
     <Name>Kung Fu Panda 2</Name>
@@ -22,15 +22,7 @@
     <Year>2003</Year>
     <Details>Cartoon 03</Details>
     <FileName>D:\70_Video\3.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\kungfu_panda_2_320x480.jpg</PosterName>
-  </Movie>
-  <Movie>
-    <Name>Transformer</Name>
-    <Country>USA</Country>
-    <Year>2004</Year>
-    <Details>My favorate</Details>
-    <FileName>D:\70_Video\3.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\transformers_320x480.jpg</PosterName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\kungfu_panda_2_320x480.jpg</PosterName>
   </Movie>
   <Movie>
     <Name>Avatar</Name>
@@ -38,7 +30,7 @@
     <Year>2005</Year>
     <Details>Amazing</Details>
     <FileName>D:\70_Video\3.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\avatar_320x480.jpg</PosterName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\avatar_320x480.jpg</PosterName>
   </Movie>
   <Movie>
     <Name>Amazing Spider Man</Name>
@@ -46,7 +38,7 @@
     <Year>2005</Year>
     <Details>Amazing</Details>
     <FileName>D:\70_Video\3.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\amazing_spider_man_320x480.jpg</PosterName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\amazing_spider_man_320x480.jpg</PosterName>
   </Movie>
   <Movie>
     <Name>Astroboy</Name>
@@ -54,7 +46,7 @@
     <Year>2005</Year>
     <Details>Amazing</Details>
     <FileName>D:\70_Video\3.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\astroboy_320x480.jpg</PosterName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\astroboy_320x480.jpg</PosterName>
   </Movie>
   <Movie>
     <Name>Brave</Name>
@@ -62,7 +54,7 @@
     <Year>2005</Year>
     <Details>Amazing</Details>
     <FileName>D:\70_Video\3.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\brave_320x480.jpg</PosterName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\brave_320x480.jpg</PosterName>
   </Movie>
   <Movie>
     <Name>Epic</Name>
@@ -70,7 +62,7 @@
     <Year>2005</Year>
     <Details>Amazing</Details>
     <FileName>D:\70_Video\3.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\epic_movie_320x480.jpg</PosterName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\epic_movie_320x480.jpg</PosterName>
   </Movie>
   <Movie>
     <Name>Escape From Planet Earth</Name>
@@ -78,7 +70,15 @@
     <Year>2005</Year>
     <Details>Amazing</Details>
     <FileName>D:\70_Video\3.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\escape_from_planet_earth_320x480.jpg</PosterName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\escape_from_planet_earth_320x480.jpg</PosterName>
+  </Movie>
+  <Movie>
+    <Name>Transformer</Name>
+    <Country>USA</Country>
+    <Year>2004</Year>
+    <Details>My favorate</Details>
+    <FileName>D:\70_Video\3.rmvb</FileName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\transformers_320x480.jpg</PosterName>
   </Movie>
 <!--   <Movie>
     <Name>Hulk</Name>
@@ -86,6 +86,6 @@
     <Year>2005</Year>
     <Details>Amazing</Details>
     <FileName>D:\70_Video\3.rmvb</FileName>
-    <PosterName>C:\Users\gh.SISMARINE\Downloads\code samples\MovieHouse\posters\hulk_320x480.jpg</PosterName>
+    <PosterName>D:\01_Work_Station\Visual Studio 11\Projects\MovieHouse\posters\hulk_320x480.jpg</PosterName>
   </Movie> -->
 </ArrayOfMovie>

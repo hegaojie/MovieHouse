@@ -10,7 +10,7 @@ namespace MovieHouse
 {
     public class MovieViewModel : PropertyChangedBase
     {
-        private readonly int AnimationMilliseconds = 5000;
+        private readonly int AnimationMilliseconds = 300;
         private readonly Movie _movie;
 
         public readonly double _originalWidth;
@@ -52,7 +52,7 @@ namespace MovieHouse
         }
 
         public int SequencialNo { get; set; }
-        
+
         public string Name
         {
             get { return _movie.Name; }
@@ -81,6 +81,8 @@ namespace MovieHouse
         }
 
         #region Binding Properties
+
+        public Visibility ButtonVisibility { get; set; }
 
         public double OffsetX
         {
@@ -243,7 +245,7 @@ namespace MovieHouse
 
         public void Play()
         {
-            _eventAggregator.Publish(_movie);
+            _eventAggregator.Publish(new PlayMovieEvent { Movie = _movie });
         }
 
         public void ShowDetails(MovieView movieView)
@@ -260,9 +262,14 @@ namespace MovieHouse
             StartScaleTransform(movieView.MovieBack, 0);
         }
 
+        public void MovePoster()
+        {
+            _eventAggregator.Publish(new MoveMovieEvent { Movie = _movie });
+        }
+
         #endregion
 
-        private void StartScaleTransform(Border grid, int targetScale)
+        private void StartScaleTransform(FrameworkElement grid, int targetScale)
         {
             grid.SetValue(Canvas.ZIndexProperty, targetScale);
             var trans = new ScaleTransform();
@@ -283,11 +290,6 @@ namespace MovieHouse
         public override int GetHashCode()
         {
             return Name.GetHashCode();
-        }
-
-        public void AnimateOpacity()
-        {
-            NewOpacity = 0.0;
         }
     }
 }

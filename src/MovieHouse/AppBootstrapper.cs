@@ -14,6 +14,7 @@ namespace MovieHouse
             _kernel.Bind<IWindowManager>().To<WindowManager>().InSingletonScope();
             _kernel.Bind<IEventAggregator>().To<EventAggregator>().InSingletonScope();
             _kernel.Bind<MovieConfig>().ToMethod(x => new MovieConfig(@"../../../mconfig.xml"));
+            _kernel.Bind<MovieProcessQueue>().ToMethod(x => new MovieProcessQueue(9));
         }
 
         protected override object GetInstance(System.Type service, string key)

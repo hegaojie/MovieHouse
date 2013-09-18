@@ -3,26 +3,74 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             xmlns:cal="http://www.caliburnproject.org" xmlns:MovieHouse="clr-namespace:MovieHouse">
-    <Grid Height="640" Width="700" Background="Aqua" >
+             xmlns:cal="http://www.caliburnproject.org" 
+             xmlns:MovieHouse="clr-namespace:MovieHouse">
+    <Grid Height="760" Width="1200" Background="Black" >
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="styles.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="600"/>
             <RowDefinition Height="40"/>
+            <RowDefinition Height="660"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="60"/>
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Column="0" Grid.Row="1" Width="50" Height="50" x:Name="FindPrevious" Style="{StaticResource RoundButtonTemplate}">
+            <Image Source="Icons\back.png">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Opacity" Value="1"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=FindPrevious, Path=IsEnabled}" Value="False">
+                                <Setter Property="Opacity" Value="0.5"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </Button>
         
-        <MovieHouse:MVItemsControl x:Name="Movies" Grid.Row="0">
+        <MovieHouse:MVItemsControl x:Name="Movies" Grid.Row="1" Grid.Column="1">
             <MovieHouse:MVItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas IsItemsHost="True"/>
                 </ItemsPanelTemplate>
             </MovieHouse:MVItemsControl.ItemsPanel>
         </MovieHouse:MVItemsControl>
+
+        <Button Grid.Column="2" Grid.Row="1" Width="50" Height="50" x:Name="FindNext" Style="{StaticResource RoundButtonTemplate}" >
+            <Image Source="Icons\next.png">
+                <Image.Style>
+                    <Style TargetType="Image">
+                        <Setter Property="Opacity" Value="1"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=FindNext, Path=IsEnabled}" Value="False">
+                                <Setter Property="Opacity" Value="0.5"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Image.Style>
+            </Image>
+        </Button>
+        
+        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+            <Button Name="AddNewMovie" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}" >
+                <Image Source="Icons\add.png"/>
+            </Button>
             
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
-            <Button Name="AddNewMovie" Content="+" Width="40" Margin="0 0 10 0" />
-            <Button Name="RemoveNewMovie" Content="-" Width="40" Margin="0 0 10 0" />
-            <Button Content="&lt;&lt;" Width="40" x:Name="FindPrevious" Margin="0 0 10 0"/>
-            <Button Content="&gt;&gt;" Width="40" x:Name="FindNext" Margin="0 0 10 0"/>
+            <Button Name="RemoveMovie" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}" >
+                <Image Source="Icons\minus.png"/>
+            </Button>
+            
             <Label x:Name="CurrentIndex" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" />
             <Label Content="/" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" />
             <Label x:Name="Total" Foreground="Red" FontSize="20" VerticalContentAlignment="Center" />
