@@ -182,5 +182,14 @@ namespace MovieHouse
                                       {CenterX = 840, CenterY = CenterYConst, Opacity = 1, Scale = 0.4, ZIndex = 0}
                               };
         }
+
+        public MovieViewModel Center
+        {
+            get 
+            { 
+                return QueueCount > _capacity/2 ? _queue[_capacity/2] 
+                    : new MovieViewModel(new Movie(), null);
+            }
+        }
     }
 }

@@ -230,5 +230,10 @@ namespace MovieHouse
 
             return _currentIndex;
         }
+
+        public MovieViewModel CurrentMovie
+        {
+            get { return _queue.Center; }
+        }
     }
 }

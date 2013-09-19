@@ -24,6 +24,8 @@
             <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
 
+        <TextBlock x:Name="CurrentMovieName" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="30" />
+        
         <Button Grid.Column="0" Grid.Row="1" Width="50" Height="50" x:Name="FindPrevious" Style="{StaticResource RoundButtonTemplate}">
             <Image Source="Icons\back.png">
                 <Image.Style>

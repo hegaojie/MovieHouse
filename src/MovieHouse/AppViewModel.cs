@@ -55,7 +55,15 @@ namespace MovieHouse
                 if (value == _currentIndex) return;
                 _currentIndex = value;
                 NotifyOfPropertyChange(() => CurrentIndex);
+                NotifyOfPropertyChange(() => CurrentMovieName);
+                NotifyOfPropertyChange(() => CanFindNext);
+                NotifyOfPropertyChange(() => CanFindPrevious);
             }
+        }
+
+        public string CurrentMovieName
+        {
+            get { return _mmanager.CurrentMovie.Name; }
         }
 
         #endregion
@@ -70,8 +78,6 @@ namespace MovieHouse
         public void FindNext()
         {
             CurrentIndex = _mmanager.FindNext();
-            NotifyOfPropertyChange(() => CanFindNext);
-            NotifyOfPropertyChange(() => CanFindPrevious);
         }
 
         public bool CanFindPrevious
@@ -82,8 +88,6 @@ namespace MovieHouse
         public void FindPrevious()
         {
             CurrentIndex = _mmanager.FindPrevious();
-            NotifyOfPropertyChange(() => CanFindNext);
-            NotifyOfPropertyChange(() => CanFindPrevious);
         }
 
         public void AddNewMovie()
