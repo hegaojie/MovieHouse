@@ -44,6 +44,7 @@ namespace MovieHouse
                 if (value == _total) return;
                 _total = value;
                 NotifyOfPropertyChange(() => Total);
+                NotifyOfPropertyChange(() => CanRemoveMovie);
             }
         }
 
@@ -58,6 +59,8 @@ namespace MovieHouse
                 NotifyOfPropertyChange(() => CurrentMovieName);
                 NotifyOfPropertyChange(() => CanFindNext);
                 NotifyOfPropertyChange(() => CanFindPrevious);
+                NotifyOfPropertyChange(() => CanPlayMovie);
+                NotifyOfPropertyChange(() => CanShowDetails);
             }
         }
 
@@ -90,20 +93,13 @@ namespace MovieHouse
             CurrentIndex = _mmanager.FindPrevious();
         }
 
-        public void AddNewMovie()
+        public void AddMovie()
         {
             _windowManager.ShowDialog(new MovieDetailViewModel(_eventAggregator));
         }
 
-        public bool CanAddNewMovie()
-        {
-            return true;
-        }
-
         public void RemoveMovie()
         {
-            _mmanager.DeleteCurrentMovie();
-
             Total--;
             
             if (!_mmanager.CanFindNext)
@@ -115,11 +111,35 @@ namespace MovieHouse
             {
                 CurrentIndex = 0;
             }
+
+            _mmanager.DeleteCurrentMovie();
+
+            NotifyOfPropertyChange(() => CurrentMovieName);
         }
 
-        public bool CanRemoveNewMovie()
+        public bool CanRemoveMovie
         {
-            return true;
+            get { return Total > 0; }
+        }
+
+        public void PlayMovie()
+        {
+            _mplayer.Play(_mmanager.CurrentMovie.FileName);
+        }
+
+        public bool CanPlayMovie
+        {
+            get { return CurrentIndex > 0; }
+        }
+
+        public void ShowDetails()
+        {
+            // TODO:
+        }
+
+        public bool CanShowDetails
+        {
+            get { return CanPlayMovie; }
         }
 
         #endregion

@@ -6,50 +6,30 @@
              xmlns:cal="http://www.caliburnproject.org" 
              xmlns:MovieHouse="clr-namespace:MovieHouse">
     <Grid>
-        <!--Border-->
-        <Border x:Name="MovieBorder" Canvas.ZIndex="1" Background="Green" >
-            <Border.Style>
-                <Style TargetType="Border">
-                    <Setter Property="Border.Opacity" Value="0"/>
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=MovieFront, Path=IsMouseOver}" Value="True">
-                            <Setter Property="Border.Opacity" Value="1"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
-        </Border>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="styles.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
 
         <!--Front Side-->
-        <MovieHouse:ReflectionControl x:Name="MovieFront" Canvas.ZIndex="1" Margin="2">
-            <Grid>
-                <Button x:Name="MovePoster">
-                    <Image x:Name="Img" Source="{Binding Path=Poster}" />
-                </Button>
-                
-                <StackPanel Orientation="Vertical" FlowDirection="RightToLeft" VerticalAlignment="Bottom">
-                    <StackPanel.Style>
-                        <Style TargetType="StackPanel">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                            <Style.Triggers>
-                                <MultiDataTrigger>
-                                    <MultiDataTrigger.Conditions>
-                                        <Condition Binding="{Binding Path=Opacity}" Value="1.0"/>
-                                        <Condition Binding="{Binding ElementName=MovieFront, Path=IsMouseOver}" Value="True"/>
-                                    </MultiDataTrigger.Conditions>
-                                    <Setter Property="Visibility" Value="Visible"/>
-                                </MultiDataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </StackPanel.Style>
-                    <Button Name="Play" Content="Play" Width="60" Height="20" Margin="0 0 0 5" HorizontalAlignment="Left" Visibility="{Binding Path=ButtonVisibility}" />
-                    <Button Content="Details" Width="60" Height="20" Margin="0 0 0 5" cal:Message.Attach="[Event Click] = [Action ShowDetails($view)]" HorizontalAlignment="Left"/>
-                </StackPanel>
-            </Grid>
+        <MovieHouse:ReflectionControl x:Name="MovieFront" Canvas.ZIndex="1" >
+            <!--<MovieHouse:ReflectionControl.Effect>
+                <BlurEffect Radius="10"/>
+            </MovieHouse:ReflectionControl.Effect>-->
+            <Button x:Name="MovePoster" Style="{StaticResource ImageButtonStyle}" >
+                <Image Source="{Binding Path=Poster}">
+                    <Image.Effect>
+                        <BlurEffect Radius="{Binding Path=BlurRadius}"/>
+                    </Image.Effect>
+                </Image>
+            </Button>
         </MovieHouse:ReflectionControl>
 
         <!--Back Side-->
-        <Grid Background="Wheat" x:Name="MovieBack" Canvas.ZIndex="0" Margin="4">
+        <!--<Grid Background="Wheat" x:Name="MovieBack" Canvas.ZIndex="0" Margin="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="70"/>
                 <ColumnDefinition Width="*"/>
@@ -96,7 +76,7 @@
             <StackPanel Grid.Column="1" Grid.Row="7" Orientation="Horizontal" FlowDirection="RightToLeft">
                 <Button Name="Back" Content="Back" Width="80" cal:Message.Attach="[Event Click] = [Action Back($view)]" />
             </StackPanel>
-        </Grid>
+        </Grid>-->
 
     </Grid>
 

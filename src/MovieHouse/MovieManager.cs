@@ -35,6 +35,7 @@ namespace MovieHouse
             _config = config;
             _queue = queue;
             _movies = new ObservableCollection<Movie>();
+            _leftNextIndex = -1;
         }
 
         public void SaveConfig()

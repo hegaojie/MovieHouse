@@ -239,6 +239,8 @@ namespace MovieHouse
             get { return _movie.Poster; }
         }
 
+        public double BlurRadius { get; set; }
+
         #endregion
 
         #region Binding Methods
@@ -250,16 +252,16 @@ namespace MovieHouse
 
         public void ShowDetails(MovieView movieView)
         {
-            StartScaleTransform(movieView.MovieBack, 1);
+            //StartScaleTransform(movieView.MovieBack, 1);
             StartScaleTransform(movieView.MovieFront, 0);
-            StartScaleTransform(movieView.MovieBorder, 0);
+            //StartScaleTransform(movieView.MovieBorder, 0);
         }
 
         public void Back(MovieView movieView)
         {
             StartScaleTransform(movieView.MovieFront, 1);
-            StartScaleTransform(movieView.MovieBorder, 1);
-            StartScaleTransform(movieView.MovieBack, 0);
+            //StartScaleTransform(movieView.MovieBorder, 1);
+            //StartScaleTransform(movieView.MovieBack, 0);
         }
 
         public void MovePoster()

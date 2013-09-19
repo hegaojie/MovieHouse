@@ -10,7 +10,7 @@ namespace MovieHouse
 
         private readonly VisualBrush _reflection;
         private readonly LinearGradientBrush _opacityMask;
-        private const int _gap = 10;
+        private const int _gap = 5;
 
         #endregion
 

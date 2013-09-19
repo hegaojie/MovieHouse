@@ -153,33 +153,32 @@ namespace MovieHouse
             }
         }
 
-        private const int CenterYConst = 300;
-
+        // 200, 100, 200, 300, 400, 500, 600, 700, 600
         private void InitializeFactorsMap()
         {
             _factorsMap = new List<AnimationFactor>
                               {
                                   new AnimationFactor
-                                      {CenterX = 240, CenterY = CenterYConst, Opacity = 1, Scale = 0.4, ZIndex = 0},       
+                                      {CenterX = 140, CenterY = 250, Opacity = 1, Scale = 0.6, ZIndex = 0},       
                                   new AnimationFactor
-                                      {CenterX = 120, CenterY = CenterYConst, Opacity = 1, Scale = 0.4, ZIndex = 1},
+                                      {CenterX = 100, CenterY = 250, Opacity = 1, Scale = 0.6, ZIndex = 1},
                                   new AnimationFactor
-                                      {CenterX = 240, CenterY = CenterYConst, Opacity = 1, Scale = 0.6, ZIndex = 2},
+                                      {CenterX = 140, CenterY = 250, Opacity = 1, Scale = 0.7, ZIndex = 2},
                                   new AnimationFactor
-                                      {CenterX = 380, CenterY = CenterYConst, Opacity = 1, Scale = 0.8, ZIndex = 3},
+                                      {CenterX = 210, CenterY = 250, Opacity = 1, Scale = 0.85, ZIndex = 3},
                                   
                                   // CENTER
                                   new AnimationFactor
-                                      {CenterX = 540.0, CenterY = CenterYConst, Opacity = 1, Scale = 1.0, ZIndex = 4},
+                                      {CenterX = 320, CenterY = 250, Opacity = 1, Scale = 1.0, ZIndex = 4},
                                   
                                   new AnimationFactor
-                                      {CenterX = 700, CenterY = CenterYConst, Opacity = 1, Scale = 0.8, ZIndex = 3},
+                                      {CenterX = 430, CenterY = 250, Opacity = 1, Scale = 0.85, ZIndex = 3},
                                   new AnimationFactor
-                                      {CenterX = 840, CenterY = CenterYConst, Opacity = 1, Scale = 0.6, ZIndex = 2},
+                                      {CenterX = 500, CenterY = 250, Opacity = 1, Scale = 0.7, ZIndex = 2},
                                   new AnimationFactor
-                                      {CenterX = 960, CenterY = CenterYConst, Opacity = 1, Scale = 0.4, ZIndex = 1},  
+                                      {CenterX = 540, CenterY = 250, Opacity = 1, Scale = 0.6, ZIndex = 1},  
                                   new AnimationFactor
-                                      {CenterX = 840, CenterY = CenterYConst, Opacity = 1, Scale = 0.4, ZIndex = 0}
+                                      {CenterX = 500, CenterY = 250, Opacity = 1, Scale = 0.6, ZIndex = 0}
                               };
         }
 
@@ -187,8 +186,17 @@ namespace MovieHouse
         {
             get 
             { 
-                return QueueCount > _capacity/2 ? _queue[_capacity/2] 
-                    : new MovieViewModel(new Movie(), null);
+                if (QueueCount > _capacity/2)
+                {
+                    return _queue[_capacity/2];
+                }
+
+                if (QueueCount > 0)
+                {
+                    return _queue[QueueCount - 1];
+                }
+
+                return new MovieViewModel(new Movie(), null);
             }
         }
     }
