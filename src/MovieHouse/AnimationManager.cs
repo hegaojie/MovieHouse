@@ -11,6 +11,10 @@ namespace MovieHouse
             DependencyProperty.RegisterAttached("TriggerAnimation", typeof(string), typeof(AnimationManager),
             new PropertyMetadata(string.Empty, OnTriggerAnimationPropertyChanged));
 
+        public static readonly DependencyProperty TriggerDetailsAnimationProperty =
+            DependencyProperty.RegisterAttached("TriggerDetailsAnimation", typeof(string), typeof(AnimationManager),
+            new PropertyMetadata(string.Empty, OnTriggerDetailsAnimationPropertyChanged));
+
         public static void SetTriggerAnimation(UIElement e, object value)
         {
             e.SetValue(TriggerAnimationProperty, value);
@@ -19,6 +23,16 @@ namespace MovieHouse
         public static string GetTriggerAnimation(UIElement e)
         {
             return (string)e.GetValue(TriggerAnimationProperty);
+        }
+
+        public static void SetTriggerDetailsAnimation(UIElement e, object value)
+        {
+            e.SetValue(TriggerDetailsAnimationProperty, value);
+        }
+
+        public static string GetTriggerDetailsAnimation(UIElement e)
+        {
+            return (string) e.GetValue(TriggerDetailsAnimationProperty);
         }
 
         private const double AnimationMilliseconds = 300;
@@ -73,6 +87,11 @@ namespace MovieHouse
                                              };
 
             control.BeginStoryboard(sb);
+        }
+
+        private static void OnTriggerDetailsAnimationPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

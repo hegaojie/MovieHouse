@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="MovieHouse.MovieDetail2View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             Background="White"
+             d:DesignHeight="690" d:DesignWidth="760">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <Label Grid.Column="0" Grid.Row="0" Content="Name:" FontSize="16" VerticalContentAlignment="Center" />
+        <Label Grid.Column="0" Grid.Row="1" Content="Year:" FontSize="16" VerticalContentAlignment="Center" />
+        <Label Grid.Column="0" Grid.Row="2" Content="Country:" FontSize="16" VerticalContentAlignment="Center" />
+        <Label Grid.Column="0" Grid.Row="3" Content="Video:" FontSize="16" VerticalContentAlignment="Center" />
+        <Label Grid.Column="0" Grid.Row="4" Content="Poster:" FontSize="16" VerticalContentAlignment="Center" />
+        <Label Grid.Column="0" Grid.Row="5" Content="Description:" FontSize="16" VerticalContentAlignment="Center" />
+        
+        <TextBox x:Name="Name" Grid.Column="1" Grid.Row="0" Margin="2" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="Year" Grid.Column="1" Grid.Row="1" Margin="2" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="Country" Grid.Column="1" Grid.Row="2" Margin="2" VerticalContentAlignment="Center"/>
+        
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" Margin="2">
+            <TextBox x:Name="FileName" VerticalAlignment="Stretch" VerticalContentAlignment="Center" Width="Auto"/>
+            <Button x:Name="SelectMovie" Content="Browse" Width="60" HorizontalAlignment="Right"/>
+        </StackPanel>
+        
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="4" Margin="2">
+            <TextBox x:Name="PosterName" VerticalContentAlignment="Center" Width="Auto"/>
+            <Button x:Name="SelectPoster" Content="Browse" Width="60" HorizontalAlignment="Right"/>
+        </StackPanel>
+        
+        <TextBox x:Name="Details" Grid.Column="1" Grid.Row="5" Grid.RowSpan="2" Margin="2" VerticalContentAlignment="Center"/>
+        
+        <Button x:Name="Close" Grid.Column="1" Grid.Row="7" Content="Close" Margin="2"/>
+    </Grid>
+</UserControl>

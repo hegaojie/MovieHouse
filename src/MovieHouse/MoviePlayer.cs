@@ -11,7 +11,7 @@ namespace MovieHouse
             if (_process == null)
                 _process = new Process();
 
-            _process.StartInfo = new ProcessStartInfo(fileName); ;
+            _process.StartInfo = new ProcessStartInfo(fileName);
             _process.Start();
         }
 

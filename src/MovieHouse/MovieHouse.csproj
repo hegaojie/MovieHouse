@@ -69,6 +69,10 @@
     <Compile Include="AnimationFactor.cs" />
     <Compile Include="AnimationManager.cs" />
     <Compile Include="MoveMovieEvent.cs" />
+    <Compile Include="MovieDetail2View.xaml.cs">
+      <DependentUpon>MovieDetail2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MovieDetail2ViewModel.cs" />
     <Compile Include="MovieProcessQueue.cs" />
     <Compile Include="MovieViewContainer.xaml.cs">
       <DependentUpon>MovieViewContainer.xaml</DependentUpon>
@@ -89,6 +93,10 @@
       <DependentUpon>AppView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppViewModel.cs" />
+    <Page Include="MovieDetail2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MovieDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -15,6 +15,7 @@ namespace MovieHouse
 
         private int _total;
         private int _currentIndex;
+        private string _triggerDetailsAnimation;
 
         public AppViewModel(MovieManager mmanager, MoviePlayer mplayer, IEventAggregator eventAggregator, IWindowManager windowManager)
         {
@@ -67,6 +68,23 @@ namespace MovieHouse
         public string CurrentMovieName
         {
             get { return _mmanager.CurrentMovie.Name; }
+        }
+
+        public MovieDetail2ViewModel CurrentMovieDetails
+        {
+            //get { return null; }
+            get { return new MovieDetail2ViewModel(new Movie(){Name = "Sample"}, null); }
+        }
+
+        public string TriggerDetailsAnimation
+        {
+            get { return _triggerDetailsAnimation; }
+            set
+            {
+                if (value == _triggerDetailsAnimation) return;
+                _triggerDetailsAnimation = value;
+                NotifyOfPropertyChange(() => TriggerDetailsAnimation);
+            }
         }
 
         #endregion
@@ -134,7 +152,9 @@ namespace MovieHouse
 
         public void ShowDetails()
         {
-            // TODO:
+            // TODO: animate detail panel canvas.top from -690 to 0;
+            
+            
         }
 
         public bool CanShowDetails

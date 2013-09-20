@@ -4,121 +4,67 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              xmlns:cal="http://www.caliburnproject.org" 
-             xmlns:MovieHouse="clr-namespace:MovieHouse">
-    <Grid Height="690" Width="760" Background="Black" >
-        <Grid.Resources>
-            <ResourceDictionary>
-                <ResourceDictionary.MergedDictionaries>
-                    <ResourceDictionary Source="styles.xaml"/>
-                </ResourceDictionary.MergedDictionaries>
-            </ResourceDictionary>
-        </Grid.Resources>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="60"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="60"/>
-        </Grid.ColumnDefinitions>
+             xmlns:MovieHouse="clr-namespace:MovieHouse" Width="760" Height="690">
+    <Canvas>
+        <Grid Height="690" Width="760" Background="Black" >
+            <Grid.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="styles.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="60"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="60"/>
+            </Grid.ColumnDefinitions>
 
-        <TextBlock x:Name="CurrentMovieName" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="30" />
-        
-        <Button Grid.Column="0" Grid.Row="1" Width="50" Height="50" x:Name="FindPrevious" Style="{StaticResource RoundButtonTemplate}">
-            <Image Source="Icons\back.png">
-                <Image.Style>
-                    <Style TargetType="Image">
-                        <Setter Property="Opacity" Value="1"></Setter>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=FindPrevious, Path=IsEnabled}" Value="False">
-                                <Setter Property="Opacity" Value="0.5"></Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Image.Style>
-            </Image>
-        </Button>
-        
-        <MovieHouse:MVItemsControl x:Name="Movies" Grid.Row="1" Grid.Column="1">
-            <MovieHouse:MVItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas IsItemsHost="True"/>
-                </ItemsPanelTemplate>
-            </MovieHouse:MVItemsControl.ItemsPanel>
-        </MovieHouse:MVItemsControl>
+            <!--Title-->
+            <TextBlock x:Name="CurrentMovieName" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="30" />
+            <Button x:Name="FindPrevious" Grid.Column="0" Grid.Row="1" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}">
+                <Image Source="Icons\back.png" Style="{StaticResource DisableImageStyle}"/>
+            </Button>
+            <!--Poster list-->
+            <MovieHouse:MVItemsControl x:Name="Movies" Grid.Row="1" Grid.Column="1">
+                <MovieHouse:MVItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas IsItemsHost="True"/>
+                    </ItemsPanelTemplate>
+                </MovieHouse:MVItemsControl.ItemsPanel>
+            </MovieHouse:MVItemsControl>
+            <Button Grid.Column="2" Grid.Row="1" Width="50" Height="50" x:Name="FindNext" Style="{StaticResource RoundButtonTemplate}" >
+                <Image Source="Icons\next.png" Style="{StaticResource DisableImageStyle}"/>
+            </Button>
+            <!--Menu panel-->
+            <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button x:Name="AddMovie" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}" >
+                    <Image Source="Icons\add.png"/>
+                </Button>
+                <Button x:Name="RemoveMovie" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}" >
+                    <Image Source="Icons\delete.png" Style="{StaticResource DisableImageStyle}"/>
+                </Button>
+                <Button x:Name="PlayMovie" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}">
+                    <Image Source="Icons\play.png" Style="{StaticResource DisableImageStyle}"/>
+                </Button>
+                <Button x:Name="ShowDetails" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}">
+                    <Image Source="Icons\i.png" Style="{StaticResource DisableImageStyle}"/>
+                </Button>
+            </StackPanel>
+            <!--Statistic info-->
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                <Label x:Name="Total" Foreground="White" FontSize="20" VerticalContentAlignment="Center" />
+                <Label Content="-" Foreground="White" FontSize="20" VerticalContentAlignment="Center" />
+                <Label x:Name="CurrentIndex" Foreground="White" FontSize="20" VerticalContentAlignment="Center" />
+            </StackPanel>
+        </Grid>
+        <!--Movie details panel-->
+        <ContentControl x:Name="CurrentMovieDetails" Width="760" Height="690" Canvas.Top="-690" MovieHouse:AnimationManager.TriggerDetailsAnimation="{Binding Path=TriggerDetailsAnimation}" />
+    </Canvas>
 
-        <Button Grid.Column="2" Grid.Row="1" Width="50" Height="50" x:Name="FindNext" Style="{StaticResource RoundButtonTemplate}" >
-            <Image Source="Icons\next.png">
-                <Image.Style>
-                    <Style TargetType="Image">
-                        <Setter Property="Opacity" Value="1"></Setter>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding ElementName=FindNext, Path=IsEnabled}" Value="False">
-                                <Setter Property="Opacity" Value="0.5"></Setter>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Image.Style>
-            </Image>
-        </Button>
-        
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Name="AddMovie" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}" >
-                <Image Source="Icons\add.png"/>
-            </Button>
-            
-            <Button Name="RemoveMovie" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}" >
-                <Image Source="Icons\delete.png">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Setter Property="Opacity" Value="1"></Setter>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=RemoveMovie, Path=IsEnabled}" Value="False">
-                                    <Setter Property="Opacity" Value="0.5"></Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </Button>
-            
-            <Button x:Name="PlayMovie" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}">
-                <Image Source="Icons\play.png">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Setter Property="Opacity" Value="1"></Setter>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=PlayMovie, Path=IsEnabled}" Value="False">
-                                    <Setter Property="Opacity" Value="0.5"></Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </Button>           
-            
-            <Button x:Name="ShowDetails" Width="50" Height="50" Style="{StaticResource RoundButtonTemplate}">
-                <Image Source="Icons\i.png">
-                    <Image.Style>
-                        <Style TargetType="Image">
-                            <Setter Property="Opacity" Value="1"></Setter>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=ShowDetails, Path=IsEnabled}" Value="False">
-                                    <Setter Property="Opacity" Value="0.5"></Setter>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Style>
-                </Image>
-            </Button>
-        </StackPanel>
-        
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Left" VerticalAlignment="Center" >
-            <Label x:Name="Total" Foreground="White" FontSize="20" VerticalContentAlignment="Center" />
-            <Label Content="-" Foreground="White" FontSize="20" VerticalContentAlignment="Center" />
-            <Label x:Name="CurrentIndex" Foreground="White" FontSize="20" VerticalContentAlignment="Center" />
-        </StackPanel>
-    </Grid>
 </UserControl>
