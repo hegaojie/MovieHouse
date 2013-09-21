@@ -1,23 +1,19 @@
+using System.Windows;
 using Caliburn.Micro;
 using Microsoft.Win32;
 
 namespace MovieHouse
 {
-    public class MovieDetailViewModel : Screen
+    public class MovieDetailViewModel : PropertyChangedBase
     {
         private Movie _movie;
-
         private readonly IEventAggregator _eventAggregator;
 
-        public MovieDetailViewModel(IEventAggregator eventAggregator)
-            : this(eventAggregator, new Movie())
+        public MovieDetailViewModel(Movie movie, IEventAggregator eventAggregator)
         {
-        }
+            _movie = movie ?? new Movie();
 
-        public MovieDetailViewModel(IEventAggregator eventAggregator, Movie movie)
-        {
             _eventAggregator = eventAggregator;
-            _movie = movie;
         }
 
         public string Name
@@ -25,18 +21,9 @@ namespace MovieHouse
             get { return _movie.Name; }
             set
             {
+                if (value == _movie.Name) return;
                 _movie.Name = value;
                 NotifyOfPropertyChange(() => Name);
-            }
-        }
-
-        public int Year
-        {
-            get { return _movie.Year; }
-            set
-            {
-                _movie.Year = value;
-                NotifyOfPropertyChange(() => Year);
             }
         }
 
@@ -45,18 +32,9 @@ namespace MovieHouse
             get { return _movie.Country; }
             set
             {
+                if (value == _movie.Country) return;
                 _movie.Country = value;
                 NotifyOfPropertyChange(() => Country);
-            }
-        }
-
-        public string Details
-        {
-            get { return _movie.Details; }
-            set
-            {
-                _movie.Details = value;
-                NotifyOfPropertyChange(() => Details);
             }
         }
 
@@ -65,6 +43,7 @@ namespace MovieHouse
             get { return _movie.FileName; }
             set
             {
+                if (value == _movie.FileName) return;
                 _movie.FileName = value;
                 NotifyOfPropertyChange(() => FileName);
             }
@@ -75,12 +54,40 @@ namespace MovieHouse
             get { return _movie.PosterName; }
             set
             {
+                if (value == _movie.PosterName) return;
                 _movie.PosterName = value;
+                _movie.IsPosterChanged = true;
                 NotifyOfPropertyChange(() => PosterName);
             }
         }
 
-        public void SearchVideoFile()
+        public bool IsPosterNameChanged { get { return _movie.IsPosterChanged; } }
+
+        public Visibility CancelButtonVisibility { get { return string.IsNullOrEmpty(_movie.Name) ? Visibility.Visible : Visibility.Collapsed; } }
+
+        public int Year
+        {
+            get { return _movie.Year; }
+            set
+            {
+                if (value == _movie.Year) return;
+                _movie.Year = value;
+                NotifyOfPropertyChange(() => Year);
+            }
+        }
+
+        public string Details
+        {
+            get { return _movie.Details; }
+            set
+            {
+                if (value == _movie.Details) return;
+                _movie.Details = value;
+                NotifyOfPropertyChange(() => Details);
+            }
+        }
+
+        public void SelectMovie()
         {
             var openFile = new OpenFileDialog();
             var ret = openFile.ShowDialog();
@@ -90,7 +97,7 @@ namespace MovieHouse
             FileName = openFile.FileName;
         }
 
-        public void SearchPosterFile()
+        public void SelectPoster()
         {
             var openFile = new OpenFileDialog();
             var ret = openFile.ShowDialog();
@@ -100,20 +107,34 @@ namespace MovieHouse
             PosterName = openFile.FileName;
         }
 
-        public void Commit()
+        public void OK()
         {
-            TryClose();
-            var e = new AddMovieEvent()
-                        {
-                            Movie = _movie
-                        };
-
-            _eventAggregator.Publish(e);
+            _eventAggregator.Publish(new CloseDetailEvent());
         }
 
         public void Cancel()
         {
-            TryClose();
+            _eventAggregator.Publish(new CancelDetailEvent());
+        }
+
+        public Movie ToMovie()
+        {
+            return _movie;
+        }
+
+        public void RefreshPoster()
+        {
+            if (!IsPosterNameChanged) { return; }
+            _movie.LoadPoster();
+            _movie.IsPosterChanged = false;
+        }
+
+        public void SetMovie(Movie movie)
+        {
+            if (!_movie.Equals(movie))
+            {
+                _movie = movie;
+            }
         }
     }
 }

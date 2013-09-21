@@ -64,7 +64,8 @@
             </StackPanel>
         </Grid>
         <!--Movie details panel-->
-        <ContentControl x:Name="CurrentMovieDetails" Width="760" Height="690" Canvas.Top="-690" MovieHouse:AnimationManager.TriggerDetailsAnimation="{Binding Path=TriggerDetailsAnimation}" />
+        <ContentControl x:Name="CurrentMovieDetails" Width="760" Height="690" Canvas.Top="-690" 
+                        MovieHouse:AnimationManager.TriggerDetailsAnimation="{Binding Path=TriggerDetailsAnimation}" />
     </Canvas>
 
 </UserControl>

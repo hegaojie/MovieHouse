@@ -1,6 +1,9 @@
 [DONE] 1. reflection of movie poster
 [DONE] 2. add/remove movie
 [DONE] 3. move findNext/findPrevious from AppViewModel to MovieManager, make MovieProcessQueue as member of MovieManager
+[DONE] 4. Improve UI, e.g Icon BUTTON
+[DONE] 5. finish movie detail view implementation
 
-4. Improve UI, e.g Icon BUTTON
-5. finish movie detail view implementation
+6. refactoring
+7. support search
+8. exception handling

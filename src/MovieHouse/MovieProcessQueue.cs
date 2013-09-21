@@ -153,7 +153,6 @@ namespace MovieHouse
             }
         }
 
-        // 200, 100, 200, 300, 400, 500, 600, 700, 600
         private void InitializeFactorsMap()
         {
             _factorsMap = new List<AnimationFactor>

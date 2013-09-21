@@ -1,4 +1,8 @@
-﻿using Caliburn.Micro;
+﻿using System;
+using System.Dynamic;
+using System.Windows;
+using System.Windows.Media.Imaging;
+using Caliburn.Micro;
 using Ninject;
 
 namespace MovieHouse
@@ -20,6 +24,19 @@ namespace MovieHouse
         protected override object GetInstance(System.Type service, string key)
         {
             return _kernel.GetService(service);
+        }
+
+        protected override void OnStartup(object sender, StartupEventArgs e)
+        {
+            dynamic settings = new ExpandoObject();
+            settings.WindowsStartupLocation = WindowStartupLocation.CenterScreen;
+            settings.ResizeMode = ResizeMode.NoResize;
+            settings.Owner = null;
+            settings.ShowInTaskBar = true;
+            settings.Title = "Movie House";
+            settings.Icon = new BitmapImage(new Uri(@"pack://application:,,,/Icons/app.png"));
+
+            DisplayRootViewFor<AppViewModel>(settings);
         }
     }
 }

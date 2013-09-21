@@ -1,9 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Windows;
 using Caliburn.Micro;
 
 namespace MovieHouse
 {
-    public class AppViewModel : Conductor<object>, IHandle<AddMovieEvent>, IHandle<PlayMovieEvent>, IHandle<MoveMovieEvent>
+    public class AppViewModel : Screen, IHandle<MoveMovieEvent>, IHandle<CloseDetailEvent>, IHandle<CancelDetailEvent>
     {
         private readonly IWindowManager _windowManager;
 
@@ -31,6 +34,8 @@ namespace MovieHouse
 
             Total = _mmanager.MovieCount;
             if (Total > 0) { CurrentIndex = 1; }
+
+            TriggerDetailsAnimation = string.Empty;
         }
 
         #region Binding Properties
@@ -62,6 +67,7 @@ namespace MovieHouse
                 NotifyOfPropertyChange(() => CanFindPrevious);
                 NotifyOfPropertyChange(() => CanPlayMovie);
                 NotifyOfPropertyChange(() => CanShowDetails);
+                NotifyOfPropertyChange(() => CurrentMovieDetails);
             }
         }
 
@@ -70,11 +76,17 @@ namespace MovieHouse
             get { return _mmanager.CurrentMovie.Name; }
         }
 
-        public MovieDetail2ViewModel CurrentMovieDetails
+        private MovieDetailViewModel _newMovieViewModel;
+        public MovieDetailViewModel CurrentMovieDetails
         {
-            //get { return null; }
-            get { return new MovieDetail2ViewModel(new Movie(){Name = "Sample"}, null); }
+            get 
+            {
+                return AddNew ? _newMovieViewModel 
+                    : new MovieDetailViewModel(_mmanager.CurrentMovie, _eventAggregator);
+            }
         }
+
+        private bool AddNew { get; set; }
 
         public string TriggerDetailsAnimation
         {
@@ -113,13 +125,19 @@ namespace MovieHouse
 
         public void AddMovie()
         {
-            _windowManager.ShowDialog(new MovieDetailViewModel(_eventAggregator));
+            AddNew = true;
+
+            _newMovieViewModel = new MovieDetailViewModel(new Movie(), _eventAggregator);
+
+            TriggerDetailsAnimation = Guid.NewGuid().ToString();
+
+            NotifyOfPropertyChange(() => CurrentMovieDetails);
         }
 
         public void RemoveMovie()
         {
             Total--;
-            
+
             if (!_mmanager.CanFindNext)
             {
                 CurrentIndex--;
@@ -133,6 +151,7 @@ namespace MovieHouse
             _mmanager.DeleteCurrentMovie();
 
             NotifyOfPropertyChange(() => CurrentMovieName);
+            NotifyOfPropertyChange(() => CurrentMovieDetails);
         }
 
         public bool CanRemoveMovie
@@ -142,7 +161,15 @@ namespace MovieHouse
 
         public void PlayMovie()
         {
-            _mplayer.Play(_mmanager.CurrentMovie.FileName);
+            try
+            {
+                _mplayer.Play(_mmanager.CurrentMovie.FileName);
+            }
+            catch (Win32Exception exc)
+            {
+                MessageBox.Show("Can not find video. Please check the file path.", "MovieHouse - Error", MessageBoxButton.OK, MessageBoxImage.Error,
+                                MessageBoxResult.OK);
+            }
         }
 
         public bool CanPlayMovie
@@ -152,9 +179,7 @@ namespace MovieHouse
 
         public void ShowDetails()
         {
-            // TODO: animate detail panel canvas.top from -690 to 0;
-            
-            
+            TriggerDetailsAnimation = Guid.NewGuid().ToString();
         }
 
         public bool CanShowDetails
@@ -164,20 +189,6 @@ namespace MovieHouse
 
         #endregion
 
-        public void Handle(AddMovieEvent message)
-        {
-            var movie = message.Movie;
-            _mmanager.AddMovie(movie);
-            Total++;
-            NotifyOfPropertyChange(() => Movies);
-        }
-
-        public void Handle(PlayMovieEvent message)
-        {
-            var movie = message.Movie.FileName;
-            _mplayer.Play(movie);
-        }
-
         public void Handle(MoveMovieEvent message)
         {
             var movie = message.Movie;
@@ -185,5 +196,46 @@ namespace MovieHouse
             NotifyOfPropertyChange(() => CanFindNext);
             NotifyOfPropertyChange(() => CanFindPrevious);
         }
+
+        public void Handle(CloseDetailEvent message)
+        {
+            TriggerDetailsAnimation = Guid.NewGuid().ToString();
+
+            if (AddNew)
+            {
+                var movie = CurrentMovieDetails.ToMovie();
+                _mmanager.AddMovie(movie);
+                Total++;
+                
+                AddNew = false;
+                _newMovieViewModel = null;
+                NotifyOfPropertyChange(() => CanFindNext);
+            }
+            else
+            {
+                if (CurrentMovieDetails.IsPosterNameChanged)
+                {
+                    CurrentMovieDetails.RefreshPoster();
+                }
+            }
+
+            NotifyOfPropertyChange(() => CurrentMovieDetails);
+            NotifyOfPropertyChange(() => CurrentMovieName);
+            NotifyOfPropertyChange(() => Movies);
+        }
+
+        public void Handle(CancelDetailEvent message)
+        {
+            TriggerDetailsAnimation = Guid.NewGuid().ToString();
+            AddNew = false;
+            _newMovieViewModel = null;
+        }
+
+        protected override void OnDeactivate(bool close)
+        {
+            _mmanager.SaveConfig();
+            base.OnDeactivate(close);
+        }
+
     }
 }

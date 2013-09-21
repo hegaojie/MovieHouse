@@ -68,11 +68,13 @@
     <Compile Include="AddMovieEvent.cs" />
     <Compile Include="AnimationFactor.cs" />
     <Compile Include="AnimationManager.cs" />
+    <Compile Include="CancelDetailEvent.cs" />
+    <Compile Include="CloseDetailEvent.cs" />
     <Compile Include="MoveMovieEvent.cs" />
-    <Compile Include="MovieDetail2View.xaml.cs">
-      <DependentUpon>MovieDetail2View.xaml</DependentUpon>
+    <Compile Include="MovieDetailView.xaml.cs">
+      <DependentUpon>MovieDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MovieDetail2ViewModel.cs" />
+    <Compile Include="MovieDetailViewModel.cs" />
     <Compile Include="MovieProcessQueue.cs" />
     <Compile Include="MovieViewContainer.xaml.cs">
       <DependentUpon>MovieViewContainer.xaml</DependentUpon>
@@ -93,10 +95,6 @@
       <DependentUpon>AppView.xaml</DependentUpon>
     </Compile>
     <Compile Include="AppViewModel.cs" />
-    <Page Include="MovieDetail2View.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MovieDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -117,10 +115,6 @@
   <ItemGroup>
     <Compile Include="Movie.cs" />
     <Compile Include="MovieConfig.cs" />
-    <Compile Include="MovieDetailView.xaml.cs">
-      <DependentUpon>MovieDetailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="MovieDetailViewModel.cs" />
     <Compile Include="MovieManager.cs" />
     <Compile Include="MoviePlayer.cs" />
     <Compile Include="MovieView.xaml.cs">
@@ -166,6 +160,9 @@
     <Resource Include="Icons\delete.png" />
     <Resource Include="Icons\i.png" />
     <Resource Include="Icons\play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\app.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

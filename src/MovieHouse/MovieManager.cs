@@ -151,6 +151,8 @@ namespace MovieHouse
             nmvm.NewZIndex = dummyView.NewZIndex;
 
             _queue.Queue[index + 1] = nmvm;
+
+            _rightNextIndex++;
         }
 
         private void Add(Movie movie)
@@ -232,9 +234,14 @@ namespace MovieHouse
             return _currentIndex;
         }
 
-        public MovieViewModel CurrentMovie
+        public Movie CurrentMovie
         {
-            get { return _queue.Center; }
+            get
+            {
+                var center = _queue.Center;
+                var current = _movies.FirstOrDefault(m => m.Name == center.Name);
+                return current ?? new Movie();
+            }
         }
     }
 }

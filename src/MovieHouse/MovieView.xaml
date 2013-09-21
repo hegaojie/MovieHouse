@@ -13,71 +13,16 @@
                 </ResourceDictionary.MergedDictionaries>
             </ResourceDictionary>
         </Grid.Resources>
-
-        <!--Front Side-->
+        
         <MovieHouse:ReflectionControl x:Name="MovieFront" Canvas.ZIndex="1" >
-            <!--<MovieHouse:ReflectionControl.Effect>
-                <BlurEffect Radius="10"/>
-            </MovieHouse:ReflectionControl.Effect>-->
             <Button x:Name="MovePoster" Style="{StaticResource ImageButtonStyle}" >
-                <Image Source="{Binding Path=Poster}">
+                <Image Source="{Binding Path=Poster}" >
                     <Image.Effect>
                         <BlurEffect Radius="{Binding Path=BlurRadius}"/>
                     </Image.Effect>
                 </Image>
             </Button>
         </MovieHouse:ReflectionControl>
-
-        <!--Back Side-->
-        <!--<Grid Background="Wheat" x:Name="MovieBack" Canvas.ZIndex="0" Margin="4">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="70"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="25"/>
-            </Grid.RowDefinitions>
-
-            <Label Grid.Column="0" Grid.Row="0" Content="Name:" />
-            <Label Grid.Column="0" Grid.Row="1" Content="Year:" />
-            <Label Grid.Column="0" Grid.Row="2" Content="Country:" />
-            <Label Grid.Column="0" Grid.Row="3" Content="Video File:" />
-            <Label Grid.Column="0" Grid.Row="4" Content="Poster File:" />
-            <Label Grid.Column="0" Grid.Row="5" Content="Details:" />
-
-            <TextBox Grid.Column="1" Grid.Row="0" Name="Name" VerticalContentAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="1" Name="Year" VerticalContentAlignment="Center"/>
-            <TextBox Grid.Column="1" Grid.Row="2" Name="Country" VerticalContentAlignment="Center"/>
-            <Grid Grid.Column="1" Grid.Row="3">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" Name="FileName" VerticalContentAlignment="Center"/>
-                <Button Grid.Column="1" x:Name="SearchVideoFile" Content="File" Width="40"/>
-            </Grid>
-            <Grid Grid.Column="1" Grid.Row="4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" Name="PosterName" VerticalContentAlignment="Center"/>
-                <Button Grid.Column="1" x:Name="SearchPosterFile" Content="File" Width="40"/>
-            </Grid>
-            <TextBox Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Name="Details" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" AcceptsReturn="True"/>
-
-            <StackPanel Grid.Column="1" Grid.Row="7" Orientation="Horizontal" FlowDirection="RightToLeft">
-                <Button Name="Back" Content="Back" Width="80" cal:Message.Attach="[Event Click] = [Action Back($view)]" />
-            </StackPanel>
-        </Grid>-->
-
     </Grid>
 
 </UserControl>

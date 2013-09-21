@@ -32,7 +32,7 @@ namespace MovieHouse
 
         public static string GetTriggerDetailsAnimation(UIElement e)
         {
-            return (string) e.GetValue(TriggerDetailsAnimationProperty);
+            return (string)e.GetValue(TriggerDetailsAnimationProperty);
         }
 
         private const double AnimationMilliseconds = 300;
@@ -91,7 +91,18 @@ namespace MovieHouse
 
         private static void OnTriggerDetailsAnimationPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            var control = d as ContentControl;
+            
+            var height = (double)d.GetValue(ContentControl.HeightProperty);
+            var from = (double)d.GetValue(Canvas.TopProperty);
+            var to = from < 0 ? from + height : from - height;
+
+            var sb = new Storyboard();
+            var ctA = new DoubleAnimation(from, to, TimeSpan.FromMilliseconds(AnimationMilliseconds));
+            Storyboard.SetTargetProperty(ctA, new PropertyPath("(Canvas.Top)"));
+            sb.Children.Add(ctA);
+
+            control.BeginStoryboard(sb);
         }
     }
 }

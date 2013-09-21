@@ -13,11 +13,22 @@ namespace MovieHouse
         public string Details { get; set; }
         public string FileName { get; set; }
         public string PosterName { get; set; }
+        public int SequencialNo { get; set; }
+
+        public Movie()
+        {
+            Name = string.Empty;
+            Country = string.Empty;
+            Details = string.Empty;
+            FileName = string.Empty;
+            PosterName = string.Empty;
+        }
 
         [XmlIgnore]
         public BitmapImage Poster { get; private set; }
 
-        public int SequencialNo { get; set; }
+        [XmlIgnore]
+        public bool IsPosterChanged { get; set; }
 
         public void LoadPoster()
         {
@@ -30,16 +41,12 @@ namespace MovieHouse
         public override bool Equals(object obj)
         {
             var movie = obj as Movie;
-            if (movie != null)
-            {
-                return string.Equals(Name, movie.Name) && string.Equals(FileName, movie.FileName);
-            }
-            return false;
+            return movie != null && string.Equals(Name, movie.Name);
         }
 
         public override int GetHashCode()
         {
-            return Name.GetHashCode() | FileName.GetHashCode();
+            return Name.GetHashCode();
         }
     }
 }
