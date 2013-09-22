@@ -79,9 +79,9 @@ namespace MovieHouse
         private MovieDetailViewModel _newMovieViewModel;
         public MovieDetailViewModel CurrentMovieDetails
         {
-            get 
+            get
             {
-                return AddNew ? _newMovieViewModel 
+                return AddNew ? _newMovieViewModel
                     : new MovieDetailViewModel(_mmanager.CurrentMovie, _eventAggregator);
             }
         }
@@ -129,9 +129,9 @@ namespace MovieHouse
 
             _newMovieViewModel = new MovieDetailViewModel(new Movie(), _eventAggregator);
 
-            TriggerDetailsAnimation = Guid.NewGuid().ToString();
-
             NotifyOfPropertyChange(() => CurrentMovieDetails);
+
+            TriggerDetailsAnimation = Guid.NewGuid().ToString();
         }
 
         public void RemoveMovie()
@@ -179,6 +179,8 @@ namespace MovieHouse
 
         public void ShowDetails()
         {
+            NotifyOfPropertyChange(() => CurrentMovieDetails);
+
             TriggerDetailsAnimation = Guid.NewGuid().ToString();
         }
 
@@ -206,7 +208,7 @@ namespace MovieHouse
                 var movie = CurrentMovieDetails.ToMovie();
                 _mmanager.AddMovie(movie);
                 Total++;
-                
+
                 AddNew = false;
                 _newMovieViewModel = null;
                 NotifyOfPropertyChange(() => CanFindNext);
