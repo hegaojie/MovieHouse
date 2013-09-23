@@ -99,7 +99,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MovieView.xaml">
+    <Page Include="MovieBriefView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,10 +117,10 @@
     <Compile Include="MovieConfig.cs" />
     <Compile Include="MovieManager.cs" />
     <Compile Include="MoviePlayer.cs" />
-    <Compile Include="MovieView.xaml.cs">
-      <DependentUpon>MovieView.xaml</DependentUpon>
+    <Compile Include="MovieBriefView.xaml.cs">
+      <DependentUpon>MovieBriefView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MovieViewModel.cs" />
+    <Compile Include="MovieBriefViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -6,11 +6,11 @@ namespace MovieHouse
 {
     public class MovieProcessQueue
     {
-        private readonly ObservableCollection<MovieViewModel> _queue;
+        private readonly ObservableCollection<MovieBriefViewModel> _queue;
         private readonly int _capacity;
         private IList<AnimationFactor> _factorsMap;
 
-        public ObservableCollection<MovieViewModel> Queue { get { return _queue; } }
+        public ObservableCollection<MovieBriefViewModel> Queue { get { return _queue; } }
 
         public int Capacity { get { return _capacity; } }
 
@@ -19,7 +19,7 @@ namespace MovieHouse
         public MovieProcessQueue(int capacity)
         {
             _capacity = capacity;
-            _queue = new ObservableCollection<MovieViewModel>();
+            _queue = new ObservableCollection<MovieBriefViewModel>();
 
             InitializeFactorsMap();
 
@@ -44,13 +44,13 @@ namespace MovieHouse
             return _queue[(_capacity - 1) / 2 - 1].IsDummy;
         }
 
-        public void InsertAtLeft(MovieViewModel movie)
+        public void InsertAtLeft(MovieBriefViewModel movieBrief)
         {
-            movie.CenterX = _factorsMap[0].CenterX;
-            movie.CenterY = _factorsMap[0].CenterY;
-            movie.Scale = _factorsMap[0].Scale;
-            movie.Opacity = _factorsMap[0].Opacity;
-            movie.ZIndex = _factorsMap[0].ZIndex;
+            movieBrief.CenterX = _factorsMap[0].CenterX;
+            movieBrief.CenterY = _factorsMap[0].CenterY;
+            movieBrief.Scale = _factorsMap[0].Scale;
+            movieBrief.Opacity = _factorsMap[0].Opacity;
+            movieBrief.ZIndex = _factorsMap[0].ZIndex;
 
             for (var i = 0; i < _capacity - 1; i++)
             {
@@ -61,18 +61,18 @@ namespace MovieHouse
                 _queue[i].NewZIndex = _factorsMap[i + 1].ZIndex;
             }
 
-            Insert(movie, 0, _capacity);
+            Insert(movieBrief, 0, _capacity);
         }
 
-        public void InsertAtRight(MovieViewModel newMovie)
+        public void InsertAtRight(MovieBriefViewModel newMovieBrief)
         {
             if (_queue.Count < _capacity)
             {
-                newMovie.CenterX = _factorsMap[_queue.Count].CenterX;
-                newMovie.CenterY = _factorsMap[_queue.Count].CenterY;
-                newMovie.Scale = _factorsMap[_queue.Count].Scale;
-                newMovie.Opacity = _factorsMap[_queue.Count].Opacity;
-                newMovie.ZIndex = _factorsMap[_queue.Count].ZIndex;
+                newMovieBrief.CenterX = _factorsMap[_queue.Count].CenterX;
+                newMovieBrief.CenterY = _factorsMap[_queue.Count].CenterY;
+                newMovieBrief.Scale = _factorsMap[_queue.Count].Scale;
+                newMovieBrief.Opacity = _factorsMap[_queue.Count].Opacity;
+                newMovieBrief.ZIndex = _factorsMap[_queue.Count].ZIndex;
             }
             else
             {
@@ -85,25 +85,25 @@ namespace MovieHouse
                     _queue[i].NewZIndex = _factorsMap[i - 1].ZIndex;
                 }
 
-                newMovie.CenterX = _factorsMap[_queue.Count - 1].CenterX;
-                newMovie.CenterY = _factorsMap[_queue.Count - 1].CenterY;
-                newMovie.Scale = _factorsMap[_queue.Count - 1].Scale;
-                newMovie.Opacity = _factorsMap[_queue.Count - 1].Opacity;
-                newMovie.ZIndex = _factorsMap[_queue.Count - 1].ZIndex;
+                newMovieBrief.CenterX = _factorsMap[_queue.Count - 1].CenterX;
+                newMovieBrief.CenterY = _factorsMap[_queue.Count - 1].CenterY;
+                newMovieBrief.Scale = _factorsMap[_queue.Count - 1].Scale;
+                newMovieBrief.Opacity = _factorsMap[_queue.Count - 1].Opacity;
+                newMovieBrief.ZIndex = _factorsMap[_queue.Count - 1].ZIndex;
             }
 
-            Insert(newMovie, _queue.Count, 0);
+            Insert(newMovieBrief, _queue.Count, 0);
         }
 
-        public void InsertAtRightHalf(MovieViewModel newMovie)
+        public void InsertAtRightHalf(MovieBriefViewModel newMovieBrief)
         {
             if (_queue.Count < _capacity)
             {
-                newMovie.CenterX = _factorsMap[_queue.Count].CenterX;
-                newMovie.CenterY = _factorsMap[_queue.Count].CenterY;
-                newMovie.Scale = _factorsMap[_queue.Count].Scale;
-                newMovie.Opacity = _factorsMap[_queue.Count].Opacity;
-                newMovie.ZIndex = _factorsMap[_queue.Count].ZIndex;
+                newMovieBrief.CenterX = _factorsMap[_queue.Count].CenterX;
+                newMovieBrief.CenterY = _factorsMap[_queue.Count].CenterY;
+                newMovieBrief.Scale = _factorsMap[_queue.Count].Scale;
+                newMovieBrief.Opacity = _factorsMap[_queue.Count].Opacity;
+                newMovieBrief.ZIndex = _factorsMap[_queue.Count].ZIndex;
             }
             else
             {
@@ -118,16 +118,16 @@ namespace MovieHouse
                     _queue[i].SequencialNo = _queue[i - 1].SequencialNo;
                 }
 
-                newMovie.CenterX = _factorsMap[_queue.Count - 1].CenterX;
-                newMovie.CenterY = _factorsMap[_queue.Count - 1].CenterY;
-                newMovie.Scale = _factorsMap[_queue.Count - 1].Scale;
-                newMovie.Opacity = _factorsMap[_queue.Count - 1].Opacity;
-                newMovie.ZIndex = _factorsMap[_queue.Count - 1].ZIndex;
+                newMovieBrief.CenterX = _factorsMap[_queue.Count - 1].CenterX;
+                newMovieBrief.CenterY = _factorsMap[_queue.Count - 1].CenterY;
+                newMovieBrief.Scale = _factorsMap[_queue.Count - 1].Scale;
+                newMovieBrief.Opacity = _factorsMap[_queue.Count - 1].Opacity;
+                newMovieBrief.ZIndex = _factorsMap[_queue.Count - 1].ZIndex;
             }
 
             _queue.RemoveAt(_capacity/2);
 
-            Insert(newMovie, _queue.Count, 0);
+            Insert(newMovieBrief, _queue.Count, 0);
         }
 
         public void RemoveCenter()
@@ -135,9 +135,9 @@ namespace MovieHouse
             _queue.RemoveAt(_capacity/2);
         }
 
-        private void Insert(MovieViewModel movie, int insertIndex, int removeIndex)
+        private void Insert(MovieBriefViewModel movieBrief, int insertIndex, int removeIndex)
         {
-            _queue.Insert(insertIndex, movie);
+            _queue.Insert(insertIndex, movieBrief);
 
             if (_queue.Count > _capacity)
             {
@@ -149,7 +149,7 @@ namespace MovieHouse
         {
             for (var i = 0; i < (_capacity - 1) / 2; i++)
             {
-                InsertAtRight(new MovieViewModel(new Movie(), null));
+                InsertAtRight(new MovieBriefViewModel(new Movie(), null));
             }
         }
 
@@ -181,7 +181,7 @@ namespace MovieHouse
                               };
         }
 
-        public MovieViewModel Center
+        public MovieBriefViewModel Center
         {
             get 
             { 
@@ -195,7 +195,7 @@ namespace MovieHouse
                     return _queue[QueueCount - 1];
                 }
 
-                return new MovieViewModel(new Movie(), null);
+                return new MovieBriefViewModel(new Movie(), null);
             }
         }
     }

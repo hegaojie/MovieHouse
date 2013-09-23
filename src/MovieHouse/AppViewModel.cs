@@ -40,7 +40,7 @@ namespace MovieHouse
 
         #region Binding Properties
 
-        public ReadOnlyObservableCollection<MovieViewModel> Movies { get { return _mmanager.Movies; } }
+        public ReadOnlyObservableCollection<MovieBriefViewModel> Movies { get { return _mmanager.Movies; } }
 
         public int Total
         {
@@ -238,6 +238,5 @@ namespace MovieHouse
             _mmanager.SaveConfig();
             base.OnDeactivate(close);
         }
-
     }
 }

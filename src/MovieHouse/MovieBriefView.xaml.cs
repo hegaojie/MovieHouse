@@ -3,11 +3,11 @@
 namespace MovieHouse
 {
     /// <summary>
-    /// Interaction logic for MovieView.xaml
+    /// Interaction logic for MovieBriefView.xaml
     /// </summary>
-    public partial class MovieView : UserControl
+    public partial class MovieBriefView : UserControl
     {
-        public MovieView()
+        public MovieBriefView()
         {
             InitializeComponent();
         }

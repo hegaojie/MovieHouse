@@ -13,7 +13,6 @@ namespace MovieHouse
         public string Details { get; set; }
         public string FileName { get; set; }
         public string PosterName { get; set; }
-        public int SequencialNo { get; set; }
 
         public Movie()
         {
@@ -28,6 +27,9 @@ namespace MovieHouse
         public BitmapImage Poster { get; private set; }
 
         [XmlIgnore]
+        public int SequencialNo { get; set; }
+
+        [XmlIgnore]
         public bool IsPosterChanged { get; set; }
 
         public void LoadPoster()
@@ -35,6 +37,10 @@ namespace MovieHouse
             if (File.Exists(PosterName))
             {
                 Poster = new BitmapImage(new Uri(PosterName));
+            }
+            else
+            {
+                //TODO:load default poster
             }
         }
 

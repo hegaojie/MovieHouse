@@ -1,16 +1,11 @@
-using System;
 using System.Threading;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using Caliburn.Micro;
 
 namespace MovieHouse
 {
-    public class MovieViewModel : PropertyChangedBase
+    public class MovieBriefViewModel : PropertyChangedBase
     {
-        private readonly int AnimationMilliseconds = 300;
         private readonly Movie _movie;
 
         public readonly double _originalWidth;
@@ -27,12 +22,12 @@ namespace MovieHouse
         private double _newCenterX;
         private double _newCenterY;
         private string _triggerAnimation;
-        private bool _isCurrent;
+        
         private readonly IEventAggregator _eventAggregator;
 
-        public bool IsDummy { get; set; }
+        public bool IsDummy { get; private set; }
 
-        public MovieViewModel(Movie movie, IEventAggregator eventAggregator)
+        public MovieBriefViewModel(Movie movie, IEventAggregator eventAggregator)
         {
             if (string.IsNullOrEmpty(movie.Name))
             {
@@ -47,6 +42,7 @@ namespace MovieHouse
             _eventAggregator = eventAggregator;
 
             SequencialNo = _movie.SequencialNo;
+
             _originalWidth = _movie.Poster.Width;
             _originalHeight = _movie.Poster.Height;
         }
@@ -77,54 +73,6 @@ namespace MovieHouse
                 if (value.Equals(_centerY)) return;
                 _centerY = value;
                 NotifyOfPropertyChange(() => CenterY);
-            }
-        }
-
-        #region Binding Properties
-
-        public Visibility ButtonVisibility { get; set; }
-
-        public double OffsetX
-        {
-            get { return _centerX - (_originalWidth * Scale) / 2; }
-        }
-
-        public double OffsetY
-        {
-            get { return _centerY - (_originalHeight * Scale) / 2; }
-        }
-
-        public double Opacity
-        {
-            get { return _opacity; }
-            set
-            {
-                if (value.Equals(_opacity)) return;
-                _opacity = value;
-                NotifyOfPropertyChange(() => Opacity);
-            }
-        }
-
-        public double Scale
-        {
-            get { return _scale; }
-            set
-            {
-                if (value.Equals(_scale)) return;
-                _scale = value;
-
-                NotifyOfPropertyChange(() => Scale);
-            }
-        }
-
-        public int ZIndex
-        {
-            get { return _zIndex; }
-            set
-            {
-                if (value == _zIndex) return;
-                _zIndex = value;
-                NotifyOfPropertyChange(() => ZIndex);
             }
         }
 
@@ -183,6 +131,52 @@ namespace MovieHouse
             }
         }
 
+        #region Binding Properties
+
+        public double OffsetX
+        {
+            get { return _centerX - (_originalWidth * Scale) / 2; }
+        }
+
+        public double OffsetY
+        {
+            get { return _centerY - (_originalHeight * Scale) / 2; }
+        }
+
+        public double Opacity
+        {
+            get { return _opacity; }
+            set
+            {
+                if (value.Equals(_opacity)) return;
+                _opacity = value;
+                NotifyOfPropertyChange(() => Opacity);
+            }
+        }
+
+        public double Scale
+        {
+            get { return _scale; }
+            set
+            {
+                if (value.Equals(_scale)) return;
+                _scale = value;
+
+                NotifyOfPropertyChange(() => Scale);
+            }
+        }
+
+        public int ZIndex
+        {
+            get { return _zIndex; }
+            set
+            {
+                if (value == _zIndex) return;
+                _zIndex = value;
+                NotifyOfPropertyChange(() => ZIndex);
+            }
+        }
+
         public double Width
         {
             get { return Scale * _originalWidth; }
@@ -204,36 +198,6 @@ namespace MovieHouse
             }
         }
 
-        public bool IsCurrent
-        {
-            get { return _isCurrent; }
-            set
-            {
-                if (value.Equals(_isCurrent)) return;
-                _isCurrent = value;
-                NotifyOfPropertyChange(() => IsCurrent);
-            }
-        }
-
-        public int Year
-        {
-            get { return _movie.Year; }
-            set
-            {
-                if (value.Equals(_movie.Year)) return;
-                _movie.Year = value;
-                NotifyOfPropertyChange(() => Year);
-            }
-        }
-
-        public string Country { get { return _movie.Country; } }
-
-        public string FileName { get { return _movie.FileName; } }
-
-        public string PosterName { get { return _movie.PosterName; } }
-
-        public string Details { get { return _movie.Details; } }
-
         public ImageSource Poster
         {
             get { return _movie.Poster; }
@@ -245,25 +209,6 @@ namespace MovieHouse
 
         #region Binding Methods
 
-        public void Play()
-        {
-            _eventAggregator.Publish(new PlayMovieEvent { Movie = _movie });
-        }
-
-        public void ShowDetails(MovieView movieView)
-        {
-            //StartScaleTransform(movieView.MovieBack, 1);
-            StartScaleTransform(movieView.MovieFront, 0);
-            //StartScaleTransform(movieView.MovieBorder, 0);
-        }
-
-        public void Back(MovieView movieView)
-        {
-            StartScaleTransform(movieView.MovieFront, 1);
-            //StartScaleTransform(movieView.MovieBorder, 1);
-            //StartScaleTransform(movieView.MovieBack, 0);
-        }
-
         public void MovePoster()
         {
             _eventAggregator.Publish(new MoveMovieEvent { Movie = _movie });
@@ -271,21 +216,9 @@ namespace MovieHouse
 
         #endregion
 
-        private void StartScaleTransform(FrameworkElement grid, int targetScale)
-        {
-            grid.SetValue(Canvas.ZIndexProperty, targetScale);
-            var trans = new ScaleTransform();
-            grid.RenderTransformOrigin = new Point(.5, .5);
-            grid.RenderTransform = trans;
-
-            var anim = new DoubleAnimation(1 - targetScale, targetScale, TimeSpan.FromMilliseconds(AnimationMilliseconds));
-            trans.BeginAnimation(ScaleTransform.ScaleXProperty, anim);
-            trans.BeginAnimation(ScaleTransform.ScaleYProperty, anim);
-        }
-
         public override bool Equals(object obj)
         {
-            var movie = obj as MovieViewModel;
+            var movie = obj as MovieBriefViewModel;
             return movie != null && string.Equals(Name, movie.Name);
         }
 

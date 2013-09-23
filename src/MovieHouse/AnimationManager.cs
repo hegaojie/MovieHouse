@@ -40,7 +40,7 @@ namespace MovieHouse
         private static void OnTriggerAnimationPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = d as MovieViewContainer;
-            var mvm = control.Tag as MovieViewModel;
+            var mvm = control.Tag as MovieBriefViewModel;
             if (mvm == null) { return; }
 
             var curWidth = mvm._originalWidth * mvm.Scale;

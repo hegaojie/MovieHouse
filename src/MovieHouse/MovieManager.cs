@@ -18,9 +18,9 @@ namespace MovieHouse
 
         private readonly IEventAggregator _eventAggregator;
        
-        public ReadOnlyObservableCollection<MovieViewModel> Movies
+        public ReadOnlyObservableCollection<MovieBriefViewModel> Movies
         {
-            get { return new ReadOnlyObservableCollection<MovieViewModel>(_queue.Queue); }
+            get { return new ReadOnlyObservableCollection<MovieBriefViewModel>(_queue.Queue); }
         }
 
         public int MovieCount { get { return _movies.Count; } }
@@ -46,6 +46,7 @@ namespace MovieHouse
         public void Initialize()
         {
             LoadConfig();
+
             PopulateProcessQueue();
         }
 
@@ -60,8 +61,8 @@ namespace MovieHouse
                 _rightNextIndex = _queue.Queue[_queue.QueueCount - 1].SequencialNo + 1;
             }
 
-            var newMovie = _rightNextIndex < _movies.Count ? new MovieViewModel(_movies[_rightNextIndex], _eventAggregator)
-                : new MovieViewModel(new Movie(), _eventAggregator);
+            var newMovie = _rightNextIndex < _movies.Count ? new MovieBriefViewModel(_movies[_rightNextIndex], _eventAggregator)
+                : new MovieBriefViewModel(new Movie(), _eventAggregator);
 
             _queue.InsertAtRight(newMovie);
             _queue.Animate();
@@ -80,8 +81,8 @@ namespace MovieHouse
                 _leftNextIndex = _queue.Queue[0].SequencialNo - 1;
             }
 
-            var newMovie = _leftNextIndex >= 0 ? new MovieViewModel(_movies[_leftNextIndex], _eventAggregator)
-                : new MovieViewModel(new Movie(), _eventAggregator);
+            var newMovie = _leftNextIndex >= 0 ? new MovieBriefViewModel(_movies[_leftNextIndex], _eventAggregator)
+                : new MovieBriefViewModel(new Movie(), _eventAggregator);
 
             _queue.InsertAtLeft(newMovie);
             _queue.Animate();
@@ -111,8 +112,8 @@ namespace MovieHouse
                     _rightNextIndex = _queue.Queue[_queue.QueueCount - 1].SequencialNo + 1;
                 }
 
-                var newMovie = _rightNextIndex < _movies.Count ? new MovieViewModel(_movies[_rightNextIndex], _eventAggregator)
-                    : new MovieViewModel(new Movie(), _eventAggregator);
+                var newMovie = _rightNextIndex < _movies.Count ? new MovieBriefViewModel(_movies[_rightNextIndex], _eventAggregator)
+                    : new MovieBriefViewModel(new Movie(), _eventAggregator);
 
                 _queue.InsertAtRightHalf(newMovie);
                 _queue.Animate();
@@ -137,7 +138,7 @@ namespace MovieHouse
 
             var lastMovie = _queue.Queue.LastOrDefault(m => !m.IsDummy);
             var index = _queue.Queue.IndexOf(lastMovie);
-            var nmvm = new MovieViewModel(movie, _eventAggregator);
+            var nmvm = new MovieBriefViewModel(movie, _eventAggregator);
             var dummyView = _queue.Queue[index + 1];
             nmvm.Scale = dummyView.Scale;
             nmvm.NewScale = dummyView.NewScale;
@@ -194,7 +195,7 @@ namespace MovieHouse
                     break;
                 }
 
-                var mvm = new MovieViewModel(_movies[_rightNextIndex], _eventAggregator);
+                var mvm = new MovieBriefViewModel(_movies[_rightNextIndex], _eventAggregator);
 
                 _queue.InsertAtRight(mvm);
 
